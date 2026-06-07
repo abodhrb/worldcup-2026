@@ -48,18 +48,25 @@ st.markdown("""
         padding-bottom: 5px;
         border-bottom: 2px solid #E5E7EB;
     }
+    .gold-reminder {
+        color: #DC2626;
+        font-weight: bold;
+        font-size: 14px;
+        margin-top: 5px;
+        margin-bottom: 20px;
+    }
     /* ألوان إطارات مخصصة لكل يوم للتفريق البصري */
-    .card-day1 { background-color: #FFFFFF; padding: 18px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); margin-bottom: 15px; border-right: 6px solid #3B82F6; } /* أزرق */
-    .card-day2 { background-color: #FFFFFF; padding: 18px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); margin-bottom: 15px; border-right: 6px solid #10B981; } /* أخضر */
-    .card-day3 { background-color: #FFFFFF; padding: 18px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); margin-bottom: 15px; border-right: 6px solid #F59E0B; } /* برتقالي */
-    .card-day4 { background-color: #FFFFFF; padding: 18px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); margin-bottom: 15px; border-right: 6px solid #8B5CF6; } /* بنفسجي */
-    .card-day5 { background-color: #FFFFFF; padding: 18px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); margin-bottom: 15px; border-right: 6px solid #EC4899; } /* وردي */
-    .card-day6 { background-color: #FFFFFF; padding: 18px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); margin-bottom: 15px; border-right: 6px solid #06B6D4; } /* سماوي */
+    .card-day1 { background-color: #FFFFFF; padding: 18px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); margin-bottom: 15px; border-right: 6px solid #3B82F6; }
+    .card-day2 { background-color: #FFFFFF; padding: 18px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); margin-bottom: 15px; border-right: 6px solid #10B981; }
+    .card-day3 { background-color: #FFFFFF; padding: 18px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); margin-bottom: 15px; border-right: 6px solid #F59E0B; }
+    .card-day4 { background-color: #FFFFFF; padding: 18px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); margin-bottom: 15px; border-right: 6px solid #8B5CF6; }
+    .card-day5 { background-color: #FFFFFF; padding: 18px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); margin-bottom: 15px; border-right: 6px solid #EC4899; }
+    .card-day6 { background-color: #FFFFFF; padding: 18px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); margin-bottom: 15px; border-right: 6px solid #06B6D4; }
     </style>
 """, unsafe_allow_html=True)
 
-# هيدر الموقع - الشعار الملون الرسمي لمونديال 2026
-st.image("https://upload.wikimedia.org/wikipedia/commons/4/43/FIFA_World_Cup_2026_Logo.svg", width=320)
+# هيدر الموقع - الشعار الملون الرسمي لمونديال 2026 الذي أرسلته
+st.image("https://logos-world.net/wp-content/uploads/2023/06/FIFA-World-Cup-2026-Logo.png", use_container_width=True)
 st.markdown('<div class="main-title">🏆 مسابقة توقعات كأس العالم 2026 🏆</div>', unsafe_allow_html=True)
 st.write("<h4 style='text-align: center; color: #4B5563;'>صراع التوقعات وطقطقة الشباب - بتوقيت مكة المكرمة 🕋</h4>", unsafe_allow_html=True)
 
@@ -73,10 +80,10 @@ user_code = st.text_input("🔑 الرمز السري (4 أرقام):", type="pa
 
 st.divider()
 
-# 3. قائمة مباريات الجولة الأولى (مقسمة بسهرات الأيام مدمج معها الفجر وملونة)
+# 3. قائمة مباريات الجولة الأولى (مقسمة وملونة)
 st.subheader("⚽ توقع المباريات واحفظها (مباراة بمباراة)")
 
-# سهرة 1: الخميس 11 يونيو (افتتاحية البطولة)
+# سهرة 1: الخميس 11 يونيو
 st.markdown('<div class="day-header">🗓️ سهرة الخميس 11 يونيو</div>', unsafe_allow_html=True)
 with st.container():
     st.markdown('<div class="card-day1"><b>⏱️ الخميس 11/06/2026 - 10:00 م</b><br><span style="font-size:18px; font-weight: bold;">المكسيك 🇲🇽 <span style="color: #EF4444;">VS</span> جنوب أفريقيا 🇿🇦</span></div>', unsafe_allow_html=True)
@@ -91,6 +98,7 @@ with st.container():
     if st.button("💾 حفظ التوقع", key="btn_m2"):
         if user_name and user_code: st.success("✔️ تم حفظ توقعك بنجاح!")
         else: st.error("⚠️ اكتب اسمك ورمزك فوق أولاً.")
+st.markdown('<div class="gold-reminder">💡 تذكير: لا تنسى تعبئة "التوقع الذهبي" في أسفل الصفحة قبل قفل الجولة! 🎯</div>', unsafe_allow_html=True)
 
 
 # سهرة 2: الجمعة 12 يونيو
@@ -108,6 +116,7 @@ with st.container():
     if st.button("💾 حفظ التوقع", key="btn_m4"):
         if user_name and user_code: st.success("✔️ تم حفظ توقعك بنجاح!")
         else: st.error("⚠️ اكتب اسمك ورمزك فوق أولاً.")
+st.markdown('<div class="gold-reminder">💡 تذكير: لا تنسى تعبئة "التوقع الذهبي" في أسفل الصفحة قبل قفل الجولة! 🎯</div>', unsafe_allow_html=True)
 
 
 # سهرة 3: السبت 13 يونيو
@@ -127,7 +136,7 @@ with st.container():
         else: st.error("⚠️ اكتب اسمك ورمزك فوق أولاً.")
 
 with st.container():
-    st.markdown('<div class="card-day3"><b>⏱️ الأحد 14/06/2026 - 04:00 ص (تابع لسهرة السبت فجراً)</b><br><span style="font-size:18px; font-weight: bold;">هايتي 🇭🇹 <span style="color: #EF4444;">VS</span> اسكتلندا 🏴󠁧󠁢󠁳🇪🇺</span></div>', unsafe_allow_html=True)
+    st.markdown('<div class="card-day3"><b>⏱️ الأحد 14/06/2026 - 04:00 ص (تابع لسهرة السبت فجراً)</b><br><span style="font-size:18px; font-weight: bold;">هايتي 🇭🇹 <span style="color: #EF4444;">VS</span> اسكتلندا 🏴󠁧󠁢󠁳🇪</span></div>', unsafe_allow_html=True)
     choice = st.radio("توقعك:", ["فوز هايتي 🇭🇹", "تعادل 🤝", "فوز اسكتلندا 🏴󠁧󠁢󠁳🇪"], key="radio_m7")
     if st.button("💾 حفظ التوقع", key="btn_m7"):
         if user_name and user_code: st.success("✔️ تم حفظ توقعك بنجاح!")
@@ -139,6 +148,7 @@ with st.container():
     if st.button("💾 حفظ التوقع", key="btn_m8"):
         if user_name and user_code: st.success("✔️ تم حفظ توقعك بنجاح!")
         else: st.error("⚠️ اكتب اسمك ورمزك فوق أولاً.")
+st.markdown('<div class="gold-reminder">💡 تذكير: لا تنسى تعبئة "التوقع الذهبي" في أسفل الصفحة قبل قفل الجولة! 🎯</div>', unsafe_allow_html=True)
 
 
 # سهرة 4: الأحد 14 يونيو
@@ -175,8 +185,9 @@ with st.container():
     st.markdown('<div class="card-day4"><b>⏱️ الاثنين 15/06/2026 - 05:00 ص (تابع لسهرة الأحد فجراً)</b><br><span style="font-size:18px; font-weight: bold;">بولندا 🇵🇱 <span style="color: #EF4444;">VS</span> تونس 🇹🇳</span></div>', unsafe_allow_html=True)
     choice = st.radio("توقعك:", ["فوز بولندا 🇵🇱", "تعادل 🤝", "فوز تونس 🇹🇳"], key="radio_m13")
     if st.button("💾 حفظ التوقع", key="btn_m13"):
-        if user_name and user_code: st.success("✔️ تم حفظ توقعك بنجاح!")
+        if user_name position and user_code: st.success("✔️ تم حفظ توقعك بنجاح!")
         else: st.error("⚠️ اكتب اسمك ورمزك فوق أولاً.")
+st.markdown('<div class="gold-reminder">💡 تذكير: لا تنسى تعبئة "التوقع الذهبي" في أسفل الصفحة قبل قفل الجولة! 🎯</div>', unsafe_allow_html=True)
 
 
 # سهرة 5: الاثنين 15 يونيو
@@ -201,6 +212,7 @@ with st.container():
     if st.button("💾 حفظ التوقع", key="btn_m16"):
         if user_name and user_code: st.success("✔️ تم حفظ توقعك بنجاح!")
         else: st.error("⚠️ اكتب اسمك ورمزك فوق أولاً.")
+st.markdown('<div class="gold-reminder">💡 تذكير: لا تنسى تعبئة "التوقع الذهبي" في أسفل الصفحة قبل قفل الجولة! 🎯</div>', unsafe_allow_html=True)
 
 
 # سهرة 6: الثلاثاء 16 يونيو
@@ -260,10 +272,11 @@ with st.container():
     if st.button("💾 حفظ التوقع", key="btn_m24"):
         if user_name and user_code: st.success("✔️ تم حفظ توقعك بنجاح!")
         else: st.error("⚠️ اكتب اسمك ورمزك فوق أولاً.")
+st.markdown('<div class="gold-reminder">💡 تذكير: لا تنسى تعبئة "التوقع الذهبي" بالأسفل مباشرة قبل نهاية الجولة! 🎯</div>', unsafe_allow_html=True)
 
 st.divider()
 
-# 4. قسم التوقعات الذهبية (الموقع الجديد: قبل الشروط مباشرة ومحمي باللون الأحمر والإعلان الرسمي)
+# 4. قسم التوقعات الذهبية
 st.markdown('<div class="gold-box-red">', unsafe_allow_html=True)
 st.markdown("### 🌟 قسم التوقعات الذهبية (التحدي الكبير)")
 st.markdown("<p style='color: #4B5563; font-size: 16px;'>🎯 <b>فرصة التوقعات الذهبية الكبرى!</b> طرفي النهائي وبطل كأس العالم يمنحونك (البونص الكبير) لقلب الطاولة في صدارة الترتيب.. لا تفوتها! 🏆</p>", unsafe_allow_html=True)
@@ -283,7 +296,7 @@ st.markdown('</div>', unsafe_allow_html=True)
 
 st.divider()
 
-# 5. قسم الشروط والقوانين والجوائز (مفتوح دائماً في أسفل الصفحة كمرجع)
+# 5. قسم الشروط والقوانين والجوائز
 st.markdown("""
     <div class="rules-box">
         <h3 style='color: #1E3A8A; text-align: center; margin-bottom: 15px;'>📜 شروط وقوانين المسابقة والجوائز المعتمدة</h3>
