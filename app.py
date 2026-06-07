@@ -185,7 +185,7 @@ with st.container():
     st.markdown('<div class="card-day4"><b>⏱️ الاثنين 15/06/2026 - 05:00 ص (تابع لسهرة الأحد فجراً)</b><br><span style="font-size:18px; font-weight: bold;">بولندا 🇵🇱 <span style="color: #EF4444;">VS</span> تونس 🇹🇳</span></div>', unsafe_allow_html=True)
     choice = st.radio("توقعك:", ["فوز بولندا 🇵🇱", "تعادل 🤝", "فوز تونس 🇹🇳"], key="radio_m13")
     if st.button("💾 حفظ التوقع", key="btn_m13"):
-        if user_name position and user_code: st.success("✔️ تم حفظ توقعك بنجاح!")
+        if user_name and user_code: st.success("✔️ تم حفظ توقعك بنجاح!")
         else: st.error("⚠️ اكتب اسمك ورمزك فوق أولاً.")
 st.markdown('<div class="gold-reminder">💡 تذكير: لا تنسى تعبئة "التوقع الذهبي" في أسفل الصفحة قبل قفل الجولة! 🎯</div>', unsafe_allow_html=True)
 
@@ -253,8 +253,8 @@ with st.container():
         else: st.error("⚠️ اكتب اسمك ورمزك فوق أولاً.")
 
 with st.container():
-    st.markdown('<div class="card-day6"><b>⏱️ الأربعاء 17/06/2026 - 11:00 م</b><br><span style="font-size:18px; font-weight: bold;">إنجلترا 🏴󠁧󠁢󠁥󠁮󠁧󠁿 <span style="color: #EF4444;">VS</span> كرواتيا 🇭🇷</span></div>', unsafe_allow_html=True)
-    choice = st.radio("توقعك:", ["فوز إنجلترا 🏴󠁧󠁢󠁥󠁮󠁧󠁿", "تعادل 🤝", "فوز كرواتيا 🇭🇷"], key="radio_m22")
+    st.markdown('<div class="card-day6"><b>⏱️ الأربعاء 17/06/2026 - 11:00 م</b><br><span style="font-size:18px; font-weight: bold;">إنجلترا 🏴%97󠁢󠁥󠁮󠁧󠁿 <span style="color: #EF4444;">VS</span> كرواتيا 🇭🇷</span></div>', unsafe_allow_html=True)
+    choice = st.radio("توقعك:", ["فوز إنجلترا 🏴%97󠁢󠁥󠁮󠁧󠁿", "تعادل 🤝", "فوز كرواتيا 🇭🇷"], key="radio_m22")
     if st.button("💾 حفظ التوقع", key="btn_m22"):
         if user_name and user_code: st.success("✔️ تم حفظ توقعك بنجاح!")
         else: st.error("⚠️ اكتب اسمك ورمزك فوق أولاً.")
