@@ -1,16 +1,16 @@
 import streamlit as st
-from datetime import datetime
 import os
 
-# --- نسخة الإصدار: V2 ---
+# --- نسخة الإصدار: V3 ---
 
-st.set_page_config(page_title="مسابقة توقعات كأس العالم 2026 (V2)", page_icon="🏆", layout="centered")
+st.set_page_config(page_title="مسابقة توقعات كأس العالم 2026 (V3)", page_icon="🏆", layout="centered")
 
 # التنسيق للألوان والأجزاء
 st.markdown("""
     <style>
     .day-box { padding: 15px; border-radius: 10px; margin-bottom: 10px; color: white; }
     .rules-box { background-color: #f9f9f9; padding: 15px; border-radius: 10px; border: 1px solid #ddd; margin-top: 30px; color: black; }
+    .gold-reminder { color: red; font-weight: bold; margin-top: 10px; margin-bottom: 20px; }
     </style>
 """, unsafe_allow_html=True)
 
@@ -19,7 +19,7 @@ if os.path.exists("IMG_4017.jpeg"):
 
 # لوحة الإدارة
 with st.sidebar:
-    st.header("⚙️ لوحة الإدارة (V2)")
+    st.header("⚙️ لوحة الإدارة (V3)")
     admin_pass = st.text_input("كلمة سر المدير:", type="password")
     if admin_pass == "1234":
         st.success("أهلاً بك يا أبو أحمد")
@@ -32,7 +32,7 @@ with st.sidebar:
 
 st.markdown("<h1 style='text-align: center;'>🏆 مسابقة توقعات كأس العالم 2026</h1>", unsafe_allow_html=True)
 
-# قائمة المباريات بألوان مختلفة لكل يوم
+# قائمة المباريات
 matches_data = [
     ("سهرة الخميس 11 يونيو", [("🇲🇽 المكسيك", "🇿🇦 جنوب أفريقيا"), ("🇰🇷 كوريا الجنوبية", "🇯🇴 الأردن")], "#1E3A8A"),
     ("سهرة الجمعة 12 يونيو", [("🇨🇦 كندا", "🇵🇪 بيرو"), ("🇺🇸 أمريكا", "🇵🇾 باراغواي")], "#059669"),
@@ -50,17 +50,18 @@ for day, matches, color in matches_data:
         if st.button("💾 حفظ توقعي", key=f"btn_{t1}_{t2}"):
             st.success(f"تم حفظ توقعك لـ {t1} vs {t2}")
         st.markdown("---")
+    # تذكير التوقع الذهبي بالأحمر بعد كل يوم
+    st.markdown('<p class="gold-reminder">⚠️ تذكير: ينتهي التوقع الذهبي يوم 18 يونيو الساعة 11:59 مساءً.</p>', unsafe_allow_html=True)
 
-# التوقعات الذهبية مع تذكير التوقيت
+# التوقعات الذهبية
 st.subheader("🌟 التوقعات الذهبية")
-st.warning("⚠️ تذكير: يجب تسجيل توقعاتك الذهبية قبل تاريخ 14 يونيو 2026 الساعة 11:59 مساءً.")
 final1 = st.text_input("طرف النهائي الأول:")
 final2 = st.text_input("طرف النهائي الثاني:")
 champion = st.text_input("بطل كأس العالم 2026:")
 if st.button("💾 تثبيت التوقعات الذهبية"):
     st.success("تم تثبيت توقعاتك الذهبية بنجاح!")
 
-# الشروط والقوانين (في الأسفل)
+# الشروط والقوانين
 st.markdown("""
 <div class="rules-box">
 <h3>📜 شروط وقوانين المسابقة والجوائز</h3>
