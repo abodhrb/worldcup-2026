@@ -1,42 +1,42 @@
 import streamlit as st
+from datetime import datetime
 
-# 1. إعدادات الصفحة
+# إعدادات الصفحة
 st.set_page_config(page_title="مسابقة توقعات كأس العالم 2026", page_icon="🏆", layout="centered")
 
-# التصميم والتنسيق
+# التنسيق العام
 st.markdown("""
     <style>
     .main-title { text-align: center; color: #1E3A8A; font-size: 38px; font-weight: bold; margin-bottom: 10px; }
-    .rules-box { background-color: #F8FAFC; padding: 25px; border-radius: 15px; border: 2px solid #E2E8F0; margin-top: 30px; }
-    .gold-box-red { background-color: #FEF2F2; padding: 25px; border-radius: 15px; border: 2px solid #EF4444; margin-top: 30px; margin-bottom: 30px; }
-    .day-header { font-size: 20px; font-weight: bold; color: #111827; margin-top: 25px; margin-bottom: 10px; border-bottom: 2px solid #E5E7EB; }
-    .gold-reminder { color: #DC2626; font-weight: bold; font-size: 14px; margin-bottom: 20px; }
-    .lock-alert { color: #4B5563; font-size: 12px; font-style: italic; margin-bottom: 10px; }
     .card { background-color: #FFFFFF; padding: 15px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 10px; border-right: 5px solid #3B82F6; }
+    .day-header { font-size: 20px; font-weight: bold; color: #111827; margin-top: 25px; margin-bottom: 10px; }
     </style>
 """, unsafe_allow_html=True)
 
-# الصورة والعنوان
-st.image("IMG_4017.jpeg", use_container_width=True)
+# --- 1. لوحة تحكم المدير (القائمة الجانبية) ---
+with st.sidebar:
+    st.header("⚙️ لوحة الإدارة")
+    admin_pass = st.text_input("كلمة سر المدير:", type="password")
+    if admin_pass == "1234": # يمكنك تغيير الرقم
+        st.success("أهلاً بك يا أبو أحمد")
+        st.subheader("إضافة/تعديل نتائج")
+        match_name = st.text_input("اسم المباراة (مثل: المكسيك ضد جنوب أفريقيا):")
+        result = st.text_input("النتيجة (مثل: 2-1):")
+        if st.button("💾 حفظ النتيجة"):
+            st.write(f"تم حفظ نتيجة {match_name} بـ {result}")
+    else:
+        st.info("القسم مخصص للإدارة فقط")
+
+# --- 2. الواجهة الرئيسية (للمشاركين) ---
 st.markdown('<div class="main-title">🏆 مسابقة توقعات كأس العالم 2026 🏆</div>', unsafe_allow_html=True)
-st.write("<h4 style='text-align: center; color: #4B5563;'>بتوقيت مكة المكرمة 🕋</h4>", unsafe_allow_html=True)
 
-# تسجيل المشارك
-user_name = st.text_input("👤 اسمك أو لقبك:")
-user_code = st.text_input("🔑 الرمز السري (آخر 4 أرقام من جوالك):", type="password")
+col1, col2 = st.columns(2)
+with col1:
+    user_name = st.text_input("👤 اسمك:")
+with col2:
+    user_code = st.text_input("🔑 رمز سري (آخر 4 أرقام):", type="password")
 
-def validate_input():
-    if not user_name:
-        st.error("⚠️ يرجى كتابة اسمك أو لقبك.")
-        return False
-    if len(user_code) < 4:
-        st.error("⚠️ يرجى إدخال آخر 4 أرقام من جوالك.")
-        return False
-    return True
-
-st.markdown('<p class="lock-alert">⚠️ تُقفل التوقعات تلقائياً مع صافرة البداية.</p>', unsafe_allow_html=True)
-
-# قائمة المباريات مع الأعلام المعتمدة
+# المباريات
 matches_list = [
     ("سهرة الخميس 11 يونيو", [("الخميس 11/06 - 10:00 م", "🇲🇽 المكسيك", "🇿🇦 جنوب أفريقيا"), ("الجمعة 12/06 - 05:00 ص", "🇰🇷 كوريا الجنوبية", "🇯🇴 الأردن")]),
     ("سهرة الجمعة 12 يونيو", [("الجمعة 12/06 - 10:00 م", "🇨🇦 كندا", "🇵🇪 بيرو"), ("السبت 13/06 - 04:00 ص", "🇺🇸 أمريكا", "🇵🇾 باراغواي")]),
@@ -50,32 +50,19 @@ for day, matches in matches_list:
     st.markdown(f'<div class="day-header">{day}</div>', unsafe_allow_html=True)
     for time, t1, t2 in matches:
         st.markdown(f'<div class="card"><b>⏱️ {time}</b><br>{t1} VS {t2}</div>', unsafe_allow_html=True)
-        # إزالة الأعلام من نص التوقعات ليبقى الاسم فقط للبرمجة
-        name1 = t1.split(" ", 1)[1] if " " in t1 else t1
-        name2 = t2.split(" ", 1)[1] if " " in t2 else t2
-        st.radio("توقعك:", [f"فوز {name1}", "تعادل", f"فوز {name2}"], key=f"{time}")
-        if st.button("💾 حفظ التوقع", key=f"btn_{time}"):
-            if validate_input(): st.success("✔️ تم حفظ توقعك!")
-    st.markdown('<div class="gold-reminder">💡 تذكير: لا تنسى تعبئة "التوقع الذهبي" في الأسفل قبل قفل الجولة! 🎯</div>', unsafe_allow_html=True)
+        st.radio("توقعك:", [f"فوز {t1.split(' ', 1)[1]}", "تعادل", f"فوز {t2.split(' ', 1)[1]}"], key=f"radio_{time}")
+        if st.button("💾 حفظ توقعي", key=f"btn_{time}"):
+            st.success("تم تسجيل توقعك!")
 
-# التوقع الذهبي
-st.markdown('<div class="gold-box-red"><h3>🌟 التوقعات الذهبية</h3><p>يغلق هذا القسم فور انتهاء الجولة الأولى.</p></div>', unsafe_allow_html=True)
-st.text_input("🏳️ توقع طرف النهائي الأول:")
-st.text_input("🏳️ توقع طرف النهائي الثاني:")
-st.text_input("👑 توقع بطل كأس العالم 2026:")
-if st.button("💾 حفظ التوقعات الذهبية"):
-    if validate_input(): st.success("🔥 تم تثبيت توقعاتك الذهبية!")
-
-# الشروط والجوائز
-st.markdown("""
-    <div class="rules-box">
-        <h3>📜 شروط وقوانين المسابقة والجوائز</h3>
-        <ul>
-            <li><b>🥇 المركز الأول:</b> هدية قيمة وخاصة.</li>
-            <li><b>🥈 المركز الثاني:</b> هدية ترضية مميزة.</li>
-            <li><b>🥉 المركز الثالث:</b> هدية ترضية لطيفة.</li>
-            <li><b>نظام النقاط:</b> نقطة لكل مباراة، (10) نقاط لكل طرف نهائي صحيح، و(20) نقطة لتوقع البطل.</li>
-            <li><b>القفل:</b> التوقعات تغلق تلقائياً مع بداية المباراة، والذهبي يغلق بعد الجولة الأولى.</li>
-        </ul>
-    </div>
-""", unsafe_allow_html=True)
+# --- 3. التوقع الذهبي (مع عداد زمني) ---
+st.markdown("---")
+st.subheader("🌟 التوقعات الذهبية")
+closing_date = datetime(2026, 6, 14, 23, 59)
+if datetime.now() < closing_date:
+    st.text_input("طرف النهائي الأول:")
+    st.text_input("طرف النهائي الثاني:")
+    st.text_input("بطل كأس العالم 2026:")
+    if st.button("💾 تثبيت التوقعات الذهبية"):
+        st.success("تم تثبيت توقعاتك الذهبية بنجاح!")
+else:
+    st.error("🚫 عذراً، تم إغلاق باب التوقعات الذهبية.")
