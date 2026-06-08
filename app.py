@@ -1,5 +1,6 @@
 import streamlit as st
 from datetime import datetime
+import os
 
 # إعدادات الصفحة
 st.set_page_config(page_title="مسابقة توقعات كأس العالم 2026", page_icon="🏆", layout="centered")
@@ -13,8 +14,9 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# إضافة الصورة (رابط مباشر لضمان ظهورها)
-st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/FIFA_World_Cup_2026_Logo.svg/1200px-FIFA_World_Cup_2026_Logo.svg.png", use_container_width=True)
+# محاولة عرض الصورة إذا كانت موجودة في نفس المجلد
+if os.path.exists("IMG_4017.jpeg"):
+    st.image("IMG_4017.jpeg", use_container_width=True)
 
 # --- 1. لوحة تحكم المدير ---
 with st.sidebar:
