@@ -7,27 +7,29 @@ st.set_page_config(page_title="مسابقة توقعات كأس العالم 202
 # التنسيق العام
 st.markdown("""
     <style>
-    .main-title { text-align: center; color: #1E3A8A; font-size: 38px; font-weight: bold; margin-bottom: 10px; }
+    .main-title { text-align: center; color: #1E3A8A; font-size: 38px; font-weight: bold; margin-bottom: 30px; }
     .card { background-color: #FFFFFF; padding: 15px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 10px; border-right: 5px solid #3B82F6; }
     .day-header { font-size: 20px; font-weight: bold; color: #111827; margin-top: 25px; margin-bottom: 10px; }
     </style>
 """, unsafe_allow_html=True)
 
-# --- 1. لوحة تحكم المدير (القائمة الجانبية) ---
+# إضافة الصورة (رابط مباشر لضمان ظهورها)
+st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/FIFA_World_Cup_2026_Logo.svg/1200px-FIFA_World_Cup_2026_Logo.svg.png", use_container_width=True)
+
+# --- 1. لوحة تحكم المدير ---
 with st.sidebar:
     st.header("⚙️ لوحة الإدارة")
     admin_pass = st.text_input("كلمة سر المدير:", type="password")
-    if admin_pass == "1234": # يمكنك تغيير الرقم
+    if admin_pass == "1234":
         st.success("أهلاً بك يا أبو أحمد")
-        st.subheader("إضافة/تعديل نتائج")
-        match_name = st.text_input("اسم المباراة (مثل: المكسيك ضد جنوب أفريقيا):")
-        result = st.text_input("النتيجة (مثل: 2-1):")
+        match_name = st.text_input("اسم المباراة:")
+        result = st.text_input("النتيجة:")
         if st.button("💾 حفظ النتيجة"):
-            st.write(f"تم حفظ نتيجة {match_name} بـ {result}")
+            st.write(f"تم حفظ: {match_name} بـ {result}")
     else:
         st.info("القسم مخصص للإدارة فقط")
 
-# --- 2. الواجهة الرئيسية (للمشاركين) ---
+# --- 2. الواجهة الرئيسية ---
 st.markdown('<div class="main-title">🏆 مسابقة توقعات كأس العالم 2026 🏆</div>', unsafe_allow_html=True)
 
 col1, col2 = st.columns(2)
@@ -54,15 +56,14 @@ for day, matches in matches_list:
         if st.button("💾 حفظ توقعي", key=f"btn_{time}"):
             st.success("تم تسجيل توقعك!")
 
-# --- 3. التوقع الذهبي (مع عداد زمني) ---
+# --- 3. التوقع الذهبي ---
 st.markdown("---")
 st.subheader("🌟 التوقعات الذهبية")
-closing_date = datetime(2026, 6, 14, 23, 59)
-if datetime.now() < closing_date:
+if datetime.now() < datetime(2026, 6, 14, 23, 59):
     st.text_input("طرف النهائي الأول:")
     st.text_input("طرف النهائي الثاني:")
     st.text_input("بطل كأس العالم 2026:")
     if st.button("💾 تثبيت التوقعات الذهبية"):
-        st.success("تم تثبيت توقعاتك الذهبية بنجاح!")
+        st.success("تم تثبيت توقعاتك!")
 else:
-    st.error("🚫 عذراً، تم إغلاق باب التوقعات الذهبية.")
+    st.error("🚫 تم إغلاق التوقعات الذهبية.")
