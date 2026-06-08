@@ -2,16 +2,25 @@ import streamlit as st
 from datetime import datetime
 import os
 
-# 1. إعدادات الصفحة
-st.set_page_config(page_title="مسابقة توقعات كأس العالم 2026", page_icon="🏆", layout="centered")
+# --- نسخة الإصدار: V1 ---
 
-# 2. عرض الصورة
+# 1. إعدادات الصفحة
+st.set_page_config(page_title="مسابقة توقعات كأس العالم 2026 (V1)", page_icon="🏆", layout="centered")
+
+# 2. التنسيق العام للشروط
+st.markdown("""
+    <style>
+    .rules-box { background-color: #f9f9f9; padding: 15px; border-radius: 10px; border: 1px solid #ddd; margin-bottom: 20px; }
+    </style>
+""", unsafe_allow_html=True)
+
+# عرض الصورة
 if os.path.exists("IMG_4017.jpeg"):
     st.image("IMG_4017.jpeg", use_container_width=True)
 
 # 3. لوحة الإدارة
 with st.sidebar:
-    st.header("⚙️ لوحة الإدارة")
+    st.header("⚙️ لوحة الإدارة (V1)")
     admin_pass = st.text_input("كلمة سر المدير:", type="password")
     if admin_pass == "1234":
         st.success("أهلاً بك يا أبو أحمد")
@@ -25,14 +34,19 @@ with st.sidebar:
 # 4. الواجهة الرئيسية
 st.markdown("<h1 style='text-align: center;'>🏆 مسابقة توقعات كأس العالم 2026</h1>", unsafe_allow_html=True)
 
-# شروط المسابقة
-with st.expander("📜 شروط وأحكام المسابقة"):
-    st.write("""
-    1. يتم احتساب النقاط بناءً على توقع النتيجة الصحيحة.
-    2. يجب تسجيل التوقع قبل بداية المباراة.
-    3. قرارات المدير (أبو أحمد) نهائية ولا تقبل النقاش.
-    4. التوقعات الذهبية يجب أن تُسجل قبل تاريخ 14 يونيو.
-    """)
+# الشروط المعتمدة (من صورتك)
+st.markdown("""
+<div class="rules-box">
+<h3>📜 شروط وقوانين المسابقة والجوائز</h3>
+<ul>
+<li><b>🥇 المركز الأول:</b> قيمة وخاصة.</li>
+<li><b>🥈 المركز الثاني:</b> هدية ترضية مميزة.</li>
+<li><b>🥉 المركز الثالث:</b> هدية ترضية لطيفة.</li>
+<li><b>نظام النقاط:</b> (10) نقاط لكل طرف نهائي صحيح، و(20) نقطة لتوقع البطل.</li>
+<li><b>القفل:</b> التوقعات تغلق تلقائياً مع بداية المباراة، والذهبي يغلق بعد الجولة الأولى.</li>
+</ul>
+</div>
+""", unsafe_allow_html=True)
 
 # 5. قائمة المباريات بتقسيم الأيام
 matches_data = [
