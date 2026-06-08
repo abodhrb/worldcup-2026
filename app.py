@@ -16,33 +16,46 @@ with st.sidebar:
     if admin_pass == "1234":
         st.success("أهلاً بك يا أبو أحمد")
         match_name = st.text_input("اسم المباراة:")
-        result = st.text_input("النتيجة (مثل: 1-0):")
-        if st.button("💾 حفظ"):
-            # هنا سنحفظ النتيجة في ملف بسيط
-            with open("results.txt", "a") as f:
-                f.write(f"{match_name}: {result}\n")
-            st.success("تم الحفظ!")
+        result = st.text_input("النتيجة:")
+        if st.button("💾 حفظ النتيجة"):
+            with open("results.txt", "a", encoding="utf-8") as f:
+                f.write(f"{match_name} | {result}\n")
+            st.success("تم الحفظ في الجدول!")
     else:
-        st.info("القسم مخصص للإدارة فقط")
+        st.info("القسم مخصص للإدارة")
 
 # 4. الواجهة الرئيسية
 st.title("🏆 مسابقة توقعات كأس العالم 2026")
 
-# عرض النتائج من الملف
+# جدول النتائج
 st.subheader("📊 جدول النتائج الرسمية")
 if os.path.exists("results.txt"):
-    with open("results.txt", "r") as f:
-        lines = f.readlines()
-        for line in lines:
-            st.write(f"✅ {line}")
+    with open("results.txt", "r", encoding="utf-8") as f:
+        for line in f.readlines():
+            st.write(f"📢 {line.strip()}")
 else:
-    st.write("لم يتم تسجيل نتائج بعد.")
+    st.write("بانتظار بدء المباريات...")
 
-# المباريات
+# قائمة المباريات
 st.markdown("---")
 st.subheader("⚽ المباريات")
-st.write("المكسيك ضد جنوب أفريقيا | كوريا ضد الأردن")
-st.radio("توقعك للمباراة الأولى:", ["فوز المكسيك", "تعادل", "فوز جنوب أفريقيا"], key="match1")
+matches = [
+    ("المكسيك vs جنوب أفريقيا", "11/06"),
+    ("كوريا الجنوبية vs الأردن", "12/06"),
+    ("كندا vs بيرو", "12/06"),
+    ("أمريكا vs باراغواي", "13/06")
+]
 
-if st.button("💾 حفظ توقعي"):
-    st.success("تم حفظ توقعك!")
+for match, date in matches:
+    st.write(f"**{match}** ({date})")
+    st.radio("توقعك:", ["فوز الأول", "تعادل", "فوز الثاني"], key=match)
+
+# التوقعات الذهبية
+st.markdown("---")
+st.subheader("🌟 التوقعات الذهبية")
+if datetime.now() < datetime(2026, 6, 14, 23, 59):
+    champion = st.text_input("بطل كأس العالم 2026:")
+    if st.button("💾 تثبيت التوقعات الذهبية"):
+        st.success("تم تثبيت التوقعات!")
+else:
+    st.error("🚫 انتهى وقت التوقعات الذهبية.")
